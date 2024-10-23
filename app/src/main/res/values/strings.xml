@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LZW Compression</string>
+
+    <!-- Add this array for the Spinner -->
+    <string-array name="channels_array">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+    </string-array>
+</resources>

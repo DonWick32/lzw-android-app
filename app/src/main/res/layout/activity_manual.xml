@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManualActivity">
+
+    <TextView
+        android:id="@+id/instructionsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Matrix Size (Rows x Columns) and Channels"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:id="@+id/rowsInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Rows"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/instructionsText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/columnsInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Columns"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/rowsInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/channelInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Channels (1 or 3)"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/columnsInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_marginTop="10dp" />
+
+    <TableLayout
+        android:id="@+id/matrixTable"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:stretchColumns="*"
+        android:scrollbars="vertical|horizontal"
+        app:layout_constraintTop_toBottomOf="@id/channelInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        android:layout_marginTop="20dp" />
+
+    <Spinner
+        android:id="@+id/channelSelector"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/matrixTable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/createTableButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Create Table"
+        app:layout_constraintTop_toBottomOf="@id/channelSelector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        app:layout_constraintTop_toBottomOf="@id/createTableButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_marginTop="10dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
