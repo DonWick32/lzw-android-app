@@ -1,14 +1,15 @@
 package don.wick.lzw;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
     private Button manualInputButton, cameraInputButton, galleryInputButton;
@@ -46,28 +47,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showResolutionDialog(final boolean isCamera) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle("Select Resolution");
 
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_resolution, null);
-        final Spinner resolutionSpinner = dialogView.findViewById(R.id.resolutionSpinner);
+        AutoCompleteTextView resolutionDropdown = dialogView.findViewById(R.id.resolutionSpinner);
 
         String[] resolutionOptions = {
-                "320x480", "480x720", "640x960", "720x1280", "1080x1920", "1440x2560", "2160x3840"
+                "320 × 480 (HVGA)",
+                "480 × 720 (HD)",
+                "640 × 960 (qHD)",
+                "720 × 1280 (HD+)",
+                "1080 × 1920 (FHD)",
+                "1440 × 2560 (QHD)",
+                "2160 × 3840 (4K UHD)"
         };
 
-        ArrayAdapter<String> resolutionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, resolutionOptions);
-        resolutionSpinner.setAdapter(resolutionAdapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                R.layout.dropdown_item_resolution,
+                resolutionOptions
+        );
 
-        builder.setView(dialogView);
+        resolutionDropdown.setAdapter(adapter);
+        resolutionDropdown.setText(resolutionOptions[0], false); // Set default selection
 
-        builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+        builder.setView(dialogView).setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String selectedResolution = (String) resolutionSpinner.getSelectedItem();
-                String[] dimensions = selectedResolution.split("x");
+                String selectedResolution = resolutionDropdown.getText().toString();
+                String[] dimensions = selectedResolution.split(" ");
                 int selectedWidth = Integer.parseInt(dimensions[0]);
-                int selectedHeight = Integer.parseInt(dimensions[1]);
+                int selectedHeight = Integer.parseInt(dimensions[2]);
 
                 Intent intent;
                 if (isCamera) {
@@ -80,9 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("SELECTED_HEIGHT", selectedHeight);
                 startActivity(intent);
             }
-        });
-
-        builder.setNegativeButton("Cancel", null);
+        }).setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());;
 
         builder.create().show();
     }

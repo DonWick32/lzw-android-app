@@ -1,8 +1,6 @@
 package don.wick.lzw;
 
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +25,6 @@ public class DecompressionResultActivity extends AppCompatActivity {
     private TableLayout lzwTable;
     private ImageView recoveredImageView;
     private LinearLayout matricesContainer;
-    private static final int MAX_ROWS_PER_TABLE = 20;
     private static final int MAX_MATRIX_DISPLAY = 20;
     private List<List<Integer>> compressedData;
     private int channels;
@@ -125,9 +122,13 @@ public class DecompressionResultActivity extends AppCompatActivity {
             decompressionDetails.setText(String.format(
                     "Decompression completed in %d ms\n" +
                             "Image dimensions: %dx%d\n" +
+                            "No. of Entries in Input: %d\n" +
+                            "No. of Entries in Output: %d\n" +
                             "Channels: %d\n\n%s",
                     result.timeTaken / 1000000,
                     originalDimensions[0], originalDimensions[1],
+                    compressedData.get(0).size() * channels,
+                    result.decompressedMatrices.get(0).length * result.decompressedMatrices.get(0)[0].length * channels,
                     channels,
                     result.resultString
             ));
@@ -253,7 +254,7 @@ public class DecompressionResultActivity extends AppCompatActivity {
         lzwTable.addView(headerRow);
 
         TableRow columnHeader = new TableRow(this);
-        String[] headers = {"Step", "Code", "Entry", "Dict Size", "Current Output"};
+        String[] headers = {"Step   ", "Code    ", "Entry   ", "Dict Size   ", "Current Output  "};
         for (String header : headers) {
             columnHeader.addView(createTextView(header, true));
         }
@@ -329,9 +330,10 @@ public class DecompressionResultActivity extends AppCompatActivity {
     private TextView createTextView(String text, boolean isHeader) {
         TextView tv = new TextView(this);
         tv.setText(text);
-        tv.setPadding(8, 8, 8, 8);
         if (isHeader) {
-            tv.setTypeface(null, Typeface.BOLD);
+            tv.setTextAppearance(R.style.TableHeader);
+        } else {
+            tv.setTextAppearance(R.style.TableCell);
         }
         return tv;
     }

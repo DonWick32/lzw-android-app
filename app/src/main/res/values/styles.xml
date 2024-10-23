@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TableHeader" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:padding">12dp</item>
+        <item name="marginHorizontal">10dp</item>
+        <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
+        <item name="android:background">?attr/colorSecondaryContainer</item>
+    </style>
+
+    <style name="TableCell" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:padding">12dp</item>
+        <item name="marginHorizontal">10dp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+</resources>

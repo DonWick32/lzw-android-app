@@ -3,9 +3,6 @@ package don.wick.lzw;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -16,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class CompressionResultActivity extends AppCompatActivity {
     private ArrayList<int[][]> matrixData;
@@ -242,11 +237,11 @@ public class CompressionResultActivity extends AppCompatActivity {
 
     private void addTableHeader(int channelNum) {
         TableRow headerRow = new TableRow(this);
-        String[] headers = {"CRS", "Current Pixel", "Encoded Output", "Dict Location", "Dict Entry"};
+        String[] headers = {"CRS    ", "Current Pixel   ", "Encoded Output  ", "Dict Location   ", "Dict Entry  "};
 
         TextView channelHeader = new TextView(this);
         channelHeader.setText("Channel " + (channelNum + 1));
-        channelHeader.setTextSize(18);
+        channelHeader.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_HeadlineSmall);
         channelHeader.setPadding(16, 32, 16, 16);
 
         TableRow channelRow = new TableRow(this);
@@ -256,8 +251,7 @@ public class CompressionResultActivity extends AppCompatActivity {
         for (String header : headers) {
             TextView textView = new TextView(this);
             textView.setText(header);
-            textView.setPadding(16, 8, 16, 8);
-            textView.setTextSize(16);
+            textView.setTextAppearance(R.style.TableHeader);
             headerRow.addView(textView);
         }
         lzwTable.addView(headerRow);
@@ -294,7 +288,7 @@ public class CompressionResultActivity extends AppCompatActivity {
     private TextView createTextView(String text) {
         TextView textView = new TextView(this);
         textView.setText(text);
-        textView.setPadding(16, 8, 16, 8);
+        textView.setTextAppearance(R.style.TableCell);
         return textView;
     }
 
@@ -302,7 +296,7 @@ public class CompressionResultActivity extends AppCompatActivity {
         TableRow row = new TableRow(this);
         TextView ellipsisView = new TextView(this);
         ellipsisView.setText("...");
-        ellipsisView.setPadding(16, 8, 16, 8);
+        ellipsisView.setTextAppearance(R.style.TableCell);
         row.addView(ellipsisView);
         lzwTable.addView(row);
     }
