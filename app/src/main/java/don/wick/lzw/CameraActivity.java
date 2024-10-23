@@ -33,8 +33,8 @@ import java.util.Collections;
 
 public class CameraActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
-    private static final int MAX_PREVIEW_WIDTH = 1080;
-    private static final int MAX_PREVIEW_HEIGHT = 1920;
+     int MAX_PREVIEW_WIDTH = 1080;
+     int MAX_PREVIEW_HEIGHT = 1920;
 
     private TextureView textureView;
     private String cameraId;
@@ -94,6 +94,10 @@ public class CameraActivity extends AppCompatActivity {
         textureView = findViewById(R.id.textureView);
         captureButton = findViewById(R.id.captureButton);
         switchColorButton = findViewById(R.id.switchColorButton);
+
+        Intent intent = getIntent();
+        MAX_PREVIEW_WIDTH = intent.getIntExtra("SELECTED_WIDTH", 1080);
+        MAX_PREVIEW_HEIGHT = intent.getIntExtra("SELECTED_HEIGHT", 1920);
 
         captureButton.setOnClickListener(v -> takePicture());
         switchColorButton.setOnClickListener(v -> {

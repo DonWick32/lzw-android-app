@@ -25,8 +25,8 @@ import java.util.ArrayList;
 public class GalleryActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 201;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private static final int MAX_PREVIEW_WIDTH = 1080;
-    private static final int MAX_PREVIEW_HEIGHT = 1920;
+   int MAX_PREVIEW_WIDTH = 1080;
+    int MAX_PREVIEW_HEIGHT = 1920;
 
     private ImageView previewImageView;
     private Button selectImageButton;
@@ -44,6 +44,10 @@ public class GalleryActivity extends AppCompatActivity {
         selectImageButton = findViewById(R.id.selectImageButton);
         switchColorButton = findViewById(R.id.switchColorButton);
         processButton = findViewById(R.id.processButton);
+
+        Intent intent = getIntent();
+        MAX_PREVIEW_WIDTH = intent.getIntExtra("SELECTED_WIDTH", 1080);
+        MAX_PREVIEW_HEIGHT = intent.getIntExtra("SELECTED_HEIGHT", 1920);
 
         selectImageButton.setOnClickListener(v -> checkPermissionAndPickImage());
 
