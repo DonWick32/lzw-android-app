@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         cameraInputButton = findViewById(R.id.cameraInputButton);
         galleryInputButton = findViewById(R.id.galleryInputButton);
 
-        // Manual input button handler
         manualInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,24 +30,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Camera input button handler
         cameraInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showResolutionDialog(true); // true for camera
+                showResolutionDialog(true);
             }
         });
 
-        // Gallery input button handler
         galleryInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showResolutionDialog(false); // false for gallery
+                showResolutionDialog(false);
             }
         });
     }
 
-    // Method to show the resolution dialog
     private void showResolutionDialog(final boolean isCamera) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Select Resolution");
@@ -68,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Get selected resolution pair
                 String selectedResolution = (String) resolutionSpinner.getSelectedItem();
                 String[] dimensions = selectedResolution.split("x");
                 int selectedWidth = Integer.parseInt(dimensions[0]);
